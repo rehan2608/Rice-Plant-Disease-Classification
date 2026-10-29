@@ -8,8 +8,7 @@ __pycache__/
 .DS_Store
 Thumbs.db
 
-# Large model binaries and feature cache (> 100 MB hard limit on GitHub)
-outputs/final_model/*.pkl
+# Large feature cache (> 100 MB hard limit on GitHub)
 outputs/feature_cache/
 
 # Raw multi-source and intermediate CV augmentations (> 600 MB)
@@ -29,3 +28,4 @@ venv/
 env/
 .idea/
 .vscode/
+
