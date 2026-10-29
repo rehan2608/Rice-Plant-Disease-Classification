@@ -25,9 +25,8 @@
 4. [Experimental Results & Empirical Findings](#4-experimental-results--empirical-findings)
 5. [Repository Structure & Artifact Catalog](#5-repository-structure--artifact-catalog)
 6. [Quick Start & Execution Guide](#6-quick-start--execution-guide)
-7. [Equitable 8-Member Group Work Division](#7-equitable-8-member-group-work-division)
-8. [Reproducibility & Quality Assurance](#8-reproducibility--quality-assurance)
-9. [References & Citations](#9-references--citations)
+7. [Reproducibility & Quality Assurance](#7-reproducibility--quality-assurance)
+8. [References & Citations](#8-references--citations)
 
 ---
 
@@ -370,44 +369,7 @@ python -m src.main --stage audit  # Integrity audit only
 
 ---
 
-## 7. Equitable 8-Member Group Work Division
-
-To ensure a balanced, academically rigorous, and fair distribution of effort, the project is divided into **8 specialized roles**. Each member owns 12.5% of the total technical workload, spanning mathematical formulation, software engineering, testing, and empirical evaluation.
-
-```
-┌──────────────────────────────────────────────────────────────────────────────────┐
-│                   8-MEMBER EQUAL WORKLOAD DISTRIBUTION MATRIX                    │
-├──────────┬────────────────────────────────────────────────────────┬──────────────┤
-│ Member   │ Primary Engineering Responsibility                     │ Share (%)    │
-├──────────┼────────────────────────────────────────────────────────┼──────────────┤
-│ Member 1 │ Data Forensics, Multi-Hash Auditing & De-Duplication   │ 12.5%        │
-│ Member 2 │ Leakage-Safe Splitting, Manifests & Data Pipeline      │ 12.5%        │
-│ Member 3 │ Image Preprocessing & Logarithmic Enhancement          │ 12.5%        │
-│ Member 4 │ Deterministic Training-Only Data Augmentation          │ 12.5%        │
-│ Member 5 │ Handcrafted Feature Engineering (CC, MCLBP & Fusion)   │ 12.5%        │
-│ Member 6 │ Group-Aware 5-Fold Cross-Validation & Model Selection  │ 12.5%        │
-│ Member 7 │ Multiclass SVM Architecture & Evaluation Engine        │ 12.5%        │
-│ Member 8 │ Inference Engine, Agronomic Advisory & CLI Deployment  │ 12.5%        │
-├──────────┴────────────────────────────────────────────────────────┼──────────────┤
-│ TOTAL EQUAL CONTRIBUTION                                          │ 100.0%       │
-└───────────────────────────────────────────────────────────────────┴──────────────┘
-```
-
-
-### Group Collaboration & Dependency Matrix
-
-| Stage | Producer (Prerequisite) | Deliverable Artifact | Consumer (Dependent Member) |
-| :---: | :--- | :--- | :--- |
-| **1 $\rightarrow$ 2** | Member 1 (Forensic Audit) | `audit/dataset_manifest_final.csv` | Member 2 (Dataset Splitting) |
-| **2 $\rightarrow$ 3, 4** | Member 2 (Splits & Loader) | `train_manifest.csv`, `dataset.py` | Member 3 (Preprocessing), Member 4 (Augmentation) |
-| **3, 4 $\rightarrow$ 5** | Member 3 & Member 4 | Balanced Preprocessed Images | Member 5 (Feature Extraction) |
-| **5 $\rightarrow$ 6** | Member 5 (Feature Vectors) | 7,168-D Fused Feature Vectors | Member 6 (Cross-Validation) |
-| **6 $\rightarrow$ 7** | Member 6 (Optimal Model Config) | Selected Config ($L=3$, RBF Kernel) | Member 7 (Model Training & Evaluation) |
-| **7 $\rightarrow$ 8** | Member 7 (Trained Model Artifact) | `rice_svm_model.pkl` | Member 8 (Inference CLI & Advisory) |
-
----
-
-## 8. Reproducibility & Quality Assurance
+## 7. Reproducibility & Quality Assurance
 
 ### Deterministic Seeding Protocol
 All stochastic operations (cross-validation fold generation, data augmentation sampling, and SVM training) are pinned to random seed `42`:
@@ -424,7 +386,7 @@ The test suite enforces four levels of regression protection:
 
 ---
 
-## 9. References & Citations
+## 8. References & Citations
 
 1. **Target Benchmark Paper**:  
    Siddique, A., et al. (2024). *“An enhanced classification system of various rice plant diseases based on multi-level handcrafted feature extraction technique.”* **Scientific Reports**, 14:30601.  
