@@ -1,0 +1,7 @@
+canonical_label,disease_name,total_raw_files,unique_sha256,redundant_exact_duplicates,quarantined_conflict_files,excluded_ls_files,clean_usable_strict,provisional_usable_expanded,leakage_groups_count,ds1_files,ds2_files,ds3_files
+BL,Blast,2000,1518,482,960,0,558,1518,1033,560,0,1440
+BLB,Bacterial Leaf Blight,3748,1886,1862,0,0,1886,1886,1056,560,1604,1584
+BS,Brown Spot,3780,1760,2020,0,0,1760,1760,1160,560,1620,1600
+SB,Sheath Blight,560,560,0,0,0,560,560,128,560,0,0
+TU,Tungro,1868,1868,0,0,0,1868,1868,632,560,0,1308
+LS,Leaf Smut (Excluded),1460,960,500,0,1460,0,0,0,0,1460,0

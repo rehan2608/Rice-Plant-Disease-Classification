@@ -1,0 +1,13 @@
+dataset_id,original_class,canonical_label,disease_name,total_raw_images,unique_sha256_count,exact_duplicate_redundant_count,quarantined_conflicts_count,recommended_usable_count
+DS1,blast,BL,Blast,560,558,2,0,558
+DS1,blight,BLB,Bacterial Leaf Blight,560,560,0,0,560
+DS1,Brownspot,BS,Brown Spot,560,560,0,0,560
+DS1,sheath_blight,SB,Sheath Blight,560,560,0,0,560
+DS1,tungro,TU,Tungro,560,560,0,0,560
+DS2,Bacterialblight,BLB,Bacterial Leaf Blight,1604,1326,278,0,0
+DS2,Brownspot,BS,Brown Spot,1620,1200,420,0,0
+DS2,Leafsmut,LS,Leaf Smut,1460,960,500,1460,0
+DS3,Blast,BL,Blast,1440,960,480,1440,0
+DS3,Bacterialblight,BLB,Bacterial Leaf Blight,1584,1326,258,0,1326
+DS3,Brownspot,BS,Brown Spot,1600,1200,400,0,1200
+DS3,Tungro,TU,Tungro,1308,1308,0,0,1308

@@ -1,0 +1,31 @@
+# Python cache & compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Large model binaries and feature cache (> 100 MB hard limit on GitHub)
+outputs/final_model/*.pkl
+outputs/feature_cache/
+
+# Raw multi-source and intermediate CV augmentations (> 600 MB)
+Data/Raw/
+Data/Augmented/
+
+# Keep directory structures
+!Data/Raw/.gitkeep
+!Data/Augmented/.gitkeep
+!outputs/final_model/.gitkeep
+!outputs/feature_cache/.gitkeep
+
+# Environments & IDEs
+.env
+.venv
+venv/
+env/
+.idea/
+.vscode/

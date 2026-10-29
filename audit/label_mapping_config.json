@@ -1,0 +1,116 @@
+{
+  "version": "1.0.0",
+  "project_name": "Rice Plant Disease Classification - Single Classifier",
+  "audit_phase": "Phase 1: Dataset Audit",
+  "canonical_classes": {
+    "BL": {
+      "disease_name": "Blast",
+      "pathogen": "Magnaporthe oryzae (Pyricularia oryzae)",
+      "target_group": "Disease"
+    },
+    "BLB": {
+      "disease_name": "Bacterial Leaf Blight",
+      "pathogen": "Xanthomonas oryzae pv. oryzae",
+      "target_group": "Disease"
+    },
+    "BS": {
+      "disease_name": "Brown Spot",
+      "pathogen": "Bipolaris oryzae (Cochliobolus miyabeanus)",
+      "target_group": "Disease"
+    },
+    "TU": {
+      "disease_name": "Tungro",
+      "pathogen": "Rice tungro bacilliform virus (RTBV) / spherical virus (RTSV)",
+      "target_group": "Disease"
+    },
+    "SB": {
+      "disease_name": "Sheath Blight",
+      "pathogen": "Rhizoctonia solani",
+      "target_group": "Disease"
+    },
+    "LS": {
+      "disease_name": "Leaf Smut",
+      "pathogen": "Entyloma oryzae",
+      "target_group": "Disease",
+      "status": "EXCLUDED",
+      "exclusion_reason": "Excluded from 5-class single classifier target due to conflicting labels and misannotation (100% collision with Blast in DS2/DS3)."
+    }
+  },
+  "target_classifier_classes": ["BL", "BLB", "BS", "SB", "TU"],
+  "dataset_specifications": {
+    "DS1": {
+      "display_name": "Dataset 1 (Data - 1)",
+      "relative_dir": "Data/Raw/Data - 1",
+      "folder_label_mapping": {
+        "blast": "BL",
+        "blight": "BLB",
+        "Brownspot": "BS",
+        "sheath_blight": "SB",
+        "tungro": "TU"
+      },
+      "hierarchy_pattern": "nested_split (Full_Train_Data / Test_Data_SVM)",
+      "notes": "Original project had pre-partitioned train/test subsets. In DS1, 'blight' refers to Bacterial Leaf Blight since Sheath Blight is segregated in 'sheath_blight'."
+    },
+    "DS2": {
+      "display_name": "Dataset 2 (Data - 2)",
+      "relative_dir": "Data/Raw/Data - 2",
+      "folder_label_mapping": {
+        "Bacterialblight": "BLB",
+        "Brownspot": "BS",
+        "Leafsmut": "LS"
+      },
+      "hierarchy_pattern": "flat_class_folders",
+      "critical_anomaly": "The folder named 'Leafsmut' contains 1,460 images all prefixed with 'BLAST' (BLAST1_... to BLAST9_...). Hashing proves 100% of its unique images (960 hashes) are identical to 'Data - 3/Blast' (BL). This constitutes a major label misannotation in DS2 and is flagged for quarantine."
+    },
+    "DS3": {
+      "display_name": "Dataset 3 (Data - 3)",
+      "relative_dir": "Data/Raw/Data - 3",
+      "folder_label_mapping": {
+        "Bacterialblight": "BLB",
+        "Blast": "BL",
+        "Brownspot": "BS",
+        "Tungro": "TU"
+      },
+      "hierarchy_pattern": "flat_class_folders",
+      "notes": "Contains four disease classes. No 'SL' or 'LS' folder exists in DS3 despite initial hypotheses."
+    }
+  },
+  "normalization_rules": {
+    "case_insensitive": true,
+    "strip_whitespace": true,
+    "aliases": {
+      "blast": "BL",
+      "blight": "BLB",
+      "bacterialblight": "BLB",
+      "bacterial_blight": "BLB",
+      "bacterial_leaf_blight": "BLB",
+      "brownspot": "BS",
+      "brown_spot": "BS",
+      "sheath_blight": "SB",
+      "sheathblight": "SB",
+      "tungro": "TU",
+      "leafsmut": "LS",
+      "leaf_smut": "LS"
+    }
+  },
+  "audit_policies": {
+    "allow_healthy_class": false,
+    "auto_map_sl_to_ls": false,
+    "supported_extensions": [
+      ".jpg",
+      ".jpeg",
+      ".png",
+      ".bmp",
+      ".tif",
+      ".tiff",
+      ".webp"
+    ],
+    "deduplication": {
+      "exact_hash_algorithm": "sha256",
+      "near_duplicate_phash_hamming_threshold": 5,
+      "near_duplicate_dhash_hamming_threshold": 5,
+      "quarantine_conflicting_duplicates": true,
+      "canonical_selection_priority": ["DS3", "DS1", "DS2"]
+    }
+  }
+}

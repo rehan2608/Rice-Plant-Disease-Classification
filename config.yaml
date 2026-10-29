@@ -1,0 +1,64 @@
+# Configuration for Rice Plant Disease Classification Reproduction
+# Paper: "An enhanced classification system of various rice plant diseases based on multi-level handcrafted feature extraction technique"
+# Scientific Reports (2024) 14:30601
+
+seed: 42
+
+paths:
+  data_raw_root: "Data/Raw"
+  augmented_dir: "Data/Augmented"
+  train_manifest: "audit/train_manifest.csv"
+  val_manifest: "audit/val_manifest.csv"
+  test_manifest: "audit/test_manifest.csv"
+  output_cv_dir: "outputs/cv_results"
+  output_final_model_dir: "outputs/final_model"
+  output_eval_dir: "outputs/evaluation"
+  feature_cache_dir: "outputs/feature_cache"
+
+dataset:
+  classes: ["BL", "BLB", "BS", "SB", "TU"]
+  num_classes: 5
+  target_train_samples_per_class: 1320  # Final training set target
+
+preprocessing:
+  image_size: [224, 224]  # Height, Width (Eq. 2)
+  log_constant_c: 2.0     # Eq. 8 (cited from ref. 53)
+  log_base: "natural"     # np.log1p (adaptation of unspecified base)
+
+augmentation:
+  seed: 42
+  rotation_range: [-10.0, 10.0]  # Eq. 6 (degrees)
+  translation_x_range: [-5, 15]  # Eq. 4 (pixels)
+  translation_y_range: [-5, 15]  # Eq. 4 (pixels)
+  allow_horizontal_flip: true    # Eq. 5
+  allow_vertical_flip: true      # Eq. 5
+
+features:
+  correlogram:
+    quantization_bins: 16        # 4 bins subdivided into 4 bins (Page 9)
+    distance: 1                  # Chebyshev / 8-neighborhood (adaptation)
+    normalize: true
+  mclbp:
+    neighbors: 8                 # P = 8 (Page 11)
+    radius: 1                    # R = 1 (Page 11)
+    bins_per_channel: 256        # Eq. 11 (Page 11)
+    channels: ["R", "G", "B"]    # Eq. 12 (Page 11)
+    candidate_levels: [3, 4, 5]  # Evaluated in CV selection
+    all_supported_levels: [1, 2, 3, 4, 5, 6, 7]
+  fusion:
+    method: "concatenation"      # Eq. 13 (Page 13)
+    l1_normalize_blocks: true    # Scale compatibility adaptation
+
+cross_validation:
+  n_splits: 5
+  strategy: "stratified_group"   # Group-aware on leakage_group_id
+  candidate_mclbp_levels: [3, 4, 5]
+  candidate_kernels: ["linear", "rbf", "poly"]
+  primary_metric: "macro_f1"
+
+model:
+  multiclass_strategy: "ovr"     # One-Against-All / One-vs-Rest (Page 13)
+  kernel: "linear"               # Paper's winning kernel (Table 11)
+  c_param: 1.0                   # Standard default (adaptation of unspecified C)
+  standardize: true              # StandardScaler fitted on train portion only
+
