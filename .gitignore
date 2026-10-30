@@ -29,3 +29,7 @@ env/
 .idea/
 .vscode/
 
+# Streamlit local credentials
+.streamlit/credentials.toml
+
+
